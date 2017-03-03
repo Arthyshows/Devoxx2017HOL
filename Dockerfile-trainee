@@ -1,0 +1,40 @@
+FROM ubuntu:16.04
+
+MAINTAINER Julien Corioland, @jcorioland, Microsoft
+
+# expose port 22 for SSH
+EXPOSE 22
+
+# update
+RUN apt-get update && apt-get -y upgrade
+
+# install dependencies
+RUN apt-get install -y python3-pip build-essential python3-dev libssl-dev libffi-dev nano git openssh-server
+
+# install Azure CLI 2.0
+RUN pip3 install azure-cli --upgrade
+
+# create sym link to python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# install kubectl
+RUN az acs kubernetes install-cli
+
+# ssh configuration
+RUN mkdir /var/run/sshd
+RUN echo 'root:P@ssw0rd!' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+# copy scripts into container
+RUN mkdir /root/scripts
+COPY scripts /root/scripts
+RUN chmod +x /root/scripts/create-k8s-cluster.sh
+
+# run sshd
+CMD ["/usr/sbin/sshd", "-D"]
