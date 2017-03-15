@@ -134,13 +134,13 @@ Create a resource group named *devoxx-k8s-rg* in the West Europe Azure datacente
 az group create --name="devoxx-k8s-rg" --location="westeurope"
 ```
 
-Start the deployment of the Kubernetes cluster using the script that is located into `/root/scripts/create-k8s-cluster.sh`. Open it using nano:
+Open the script `/root/scripts/create-k8s-cluster.sh` with nano:
 
 ```bash
 nano /root/scripts/create-k8s-cluster.sh
 ```
 
-And update the options if need (at least **YOUR_DNS_PREFIX**):
+And update the option **YOUR_DNS_PREFIX**, for example with YOURNAME-k8s:
 
 ```bash
 az acs create --resource-group "devoxx-k8s-rg" \
@@ -153,7 +153,10 @@ az acs create --resource-group "devoxx-k8s-rg" \
   --generate-ssh-keys
 ```
 
-Exit and save the file (CTRL+X then Y then ENTER). And execute the script:
+Exit and save the file (CTRL+X then Y then ENTER). 
+This script uses Azure CLI 2.0 to generate all the stuff needed for the deployment (SSH keys, Azure Service Principal...) and then deploy the cluster.
+
+Execute the script:
 
 ```bash
 cd /root/scripts
@@ -190,4 +193,10 @@ root@32322bbcf593:~/scripts#
 
 If all work well, you should see the client and server version as the output of the `kubectl version` command and the list of nodes as the output of the `kubectl get nodes` command.
 
-And you are done with this part !
+**Note: if you have changed the name of the resource group and the name of the cluster in the deployment script, you can list your cluster using:**
+
+```bash
+az acs list -o table
+```
+
+Your Kubernetes cluster is now up and running on Microsoft Azure!
