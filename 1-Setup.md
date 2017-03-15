@@ -9,8 +9,8 @@ In this part you are going to:
 
 ## 1. Create your Microsoft Azure account
 
-If you already have a Microsoft Azure account, you can skip this step.
-If you do not have one, ask for a pass to your protcors and follow the procedure on this page: https://www.microsoftazurepass.com/howto
+If you already have a Microsoft Azure account that you can use for the hands-on-lab, you can skip this step.
+If you do not have one, ask for a pass to your protcors and follow the procedure on [this page](https://github.com/DXFrance/data-hackathon/blob/master/doc/AzurePASSorg.md).
 
 **NOTE: to make sure the process goes well, we recommand that you start a "in private" session with your favorite browser to avoid any issue with previous authentication / cookie.**
 
