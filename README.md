@@ -12,6 +12,8 @@ In this 3 hours hands on lab, you are going to learn:
 - How to use CloudBees Jenkins Enterprise and Jenkins Pipeline to build and deliver continuously a multi-containers application into Kubernetes
 - How to use Kubernetes CLI to scale an application 
 
+If you are a trainer and want reuse this content, read [this](trainer/README.md).
+
 ## Hands-on lab
 
 This hands-on lab is composed of the following parts:
