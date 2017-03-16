@@ -6,6 +6,8 @@ In this part you are going to:
 2. Connect to the lab environment using SSH
 3. Connect to your Microsoft Azure account
 4. Deploy your Kubernetes cluster using Azure Container Service
+5. Get and save credentials
+6. Create an Azure Container Registry
 
 ## 1. Create your Microsoft Azure account
 
@@ -200,3 +202,86 @@ az acs list -o table
 ```
 
 Your Kubernetes cluster is now up and running on Microsoft Azure!
+
+## 5. Get and save credentials
+
+During the deployment step, the Azure CLI has generated several credentials that you will need in the next parts to automate the delivery pipeline of the application into the Kubernetes cluster.
+
+First, you need to get your Tenant Id. You can get it by listing your Microsoft Azure accounts:
+
+```bash
+az account list -o table
+```
+
+And the displaying the detailled information of the account you are currently using:
+
+```bash
+az account show --subscription SUBSCRIPTION_ID
+```
+
+![Get tenant id](images/get-tenant-id.png)
+
+
+Save the Tenant Id value for later.
+
+Then, you need to get information about the service principal that has been generated during the deployment. 
+
+*Note: a service principal is a kind of service account in Azure Active Directory that allows to authenticate to your subscription in a script, for example.*
+
+You can open the file `/root/.azure/acsServicePrincipal.json` with `nano` to get the identifier of the one that has been generated:
+
+```bash
+nano /root/.azure/acsServicePrincipal.json
+```
+
+Copy the value of the `client_secret` field and save it for later.
+
+You can also copy the value of the `service_principal` field and use it to display details about this service principal, using:
+
+```bash
+az ad sp show --id SERVICE_PRINCIPAL_ID
+```
+
+Copy the service principal name (starting by http) and save it for later:
+
+![Get tenant id](images/service-principal-name.png)
+
+
+Finally, save the `id_rsa` and `id_rsa.pub` SSH private and public keys that have been generated into the `/root/.ssh` folder:
+
+![Get tenant id](images/ssh-keys.png)
+
+
+## 6. Create an Azure Container Registry
+
+Azure Container Registry is an implementation "as a service" of the open source Docker registry. 
+
+To create a new one, you can also use Azure Container CLI 2.0, with the following command:
+
+```bash
+az acr create -n "YOURNAME" -l "eastus" -g "devoxx-k8s-rg" --admin-enabled true
+```
+
+Where:
+- `n` is the name of the registry you want to create
+- `l` is the datacenter where you want the registry to be created: let **eastus** by default as Azure Container Registry is currently in preview
+- `g` is the name of the resource group where you have deployed Kubernetes before
+- `--admin-enabled` will allow you to get an admin username / password to login into the registry
+
+Please wait while the registry is deployed...
+
+Then you can get the URL and the username where the registry is available on Azure:
+
+![ACR Creation output](images/acr-create-output.png)
+
+
+Now you can get the credentials to connect the registry using:
+
+```bash
+az acr credential show --name YOURNAME
+```
+
+![ACR Creation output](images/acr-credentials.png)
+
+
+Save the registry URL, login and password for later.

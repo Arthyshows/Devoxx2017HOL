@@ -17,6 +17,9 @@ RUN pip3 install azure-cli --upgrade
 # create sym link to python
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
+# add acr component to Azure CLI 2.0
+RUN az component update --add acr
+
 # install kubectl
 RUN az acs kubernetes install-cli
 
