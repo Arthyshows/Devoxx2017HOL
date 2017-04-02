@@ -195,7 +195,6 @@ k8s-agent-8236386e-0    Ready                      1m
 k8s-agent-8236386e-1    Ready                      1m
 k8s-master-8236386e-0   Ready,SchedulingDisabled   1m
 root@32322bbcf593:~/scripts#
-
 ```
 
 If all work well, you should see the client and server version as the output of the `kubectl version` command and the list of nodes as the output of the `kubectl get nodes` command.
@@ -221,7 +220,7 @@ az account list -o table
 And the displaying the detailled information of the account you are currently using:
 
 ```bash
-az account show --subscription SUBSCRIPTION_ID
+az account show --subscription SUBSCRIPTION_ID -o table
 ```
 
 ![Get tenant id](images/get-tenant-id.png)
@@ -264,12 +263,12 @@ Azure Container Registry is an implementation "as a service" of the open source 
 To create a new one, you can also use Azure Container CLI 2.0, with the following command:
 
 ```bash
-az acr create -n "YOURNAME" -l "eastus" -g "devoxx-k8s-rg" --admin-enabled true
+az acr create -n "YOURNAME" -l "westeurope" -g "devoxx-k8s-rg" --admin-enabled true
 ```
 
 Where:
 - `n` is the name of the registry you want to create
-- `l` is the datacenter where you want the registry to be created: let **eastus** by default as Azure Container Registry is currently in preview
+- `l` is the datacenter where you want the registry to be created
 - `g` is the name of the resource group where you have deployed Kubernetes before
 - `--admin-enabled` will allow you to get an admin username / password to login into the registry
 
@@ -290,3 +289,7 @@ az acr credential show --name YOURNAME
 
 
 Save the registry URL, login and password for later.
+
+*Note: if you prefer, you can also browse you resource group using the [Microsoft Azure Portal](https://portal.azure.com) and get credentials from the **Access keys** section*:
+
+![ACR Creation output](images/acr-azure-portal.png)
