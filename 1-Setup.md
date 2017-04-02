@@ -168,6 +168,11 @@ cd /root/scripts
 The wait for the deployment to be completed.
 It can take several minutes.
 
+Once completed, you can browse the [Microsoft Azure Portal](https://portal.azure.com), login with your credentials, browse the resource group where you have deployed Kubernetes and see all the resources that have been created for you:
+
+![Kubernetes in the Microsoft Azure Portal](images/portal-deployment-completed.png)
+
+
 ### Get credentials to connect to the Kubernetes cluster
 
 Once the cluster has been provisionned, you can get the credentials and kubectl config using the following command:

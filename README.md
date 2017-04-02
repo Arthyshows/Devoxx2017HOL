@@ -19,3 +19,5 @@ If you are a trainer and want reuse this content, read [this](trainer/README.md)
 This hands-on lab is composed of the following parts:
 
 1. Part 1 - Setup: [here](1-Setup.md)
+2. Part 2 - Create CI/CD Pipeline with Jenkins: [here](https://github.com/jpbriend/mobile-deposit-api-devoxx2017)
+3. Part 3 - Scale the application: [here](3-Scale.md)
