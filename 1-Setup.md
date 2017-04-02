@@ -293,3 +293,5 @@ Save the registry URL, login and password for later.
 *Note: if you prefer, you can also browse you resource group using the [Microsoft Azure Portal](https://portal.azure.com) and get credentials from the **Access keys** section*:
 
 ![ACR Creation output](images/acr-azure-portal.png)
+
+The infrastructure is now running ! You can [go to Part 2](https://github.com/jpbriend/mobile-deposit-api-devoxx2017/blob/master/README.md) and start deploying the application !
