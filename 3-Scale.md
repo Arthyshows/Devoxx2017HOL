@@ -103,5 +103,5 @@ The other solution to scale the cluster is to use the portal.
 
 From there, you can just update the number of agents and click save to add/remove virtual machines:
 
-![Azure Container Service - Portal - Scale](images/acs-scale-node.png)
+![Azure Container Service - Portal - Scale](images/acs-scale-nodes.png)
 
